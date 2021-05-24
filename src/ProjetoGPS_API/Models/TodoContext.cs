@@ -1,5 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
+using MySql.Data.MySqlClient;
+
+using System;
+using System.Configuration;
+using System.Threading.Tasks;
+
 namespace ProjetoGPS_API.Models
 {
 	public class TodoContext : DbContext
@@ -8,6 +14,6 @@ namespace ProjetoGPS_API.Models
 		{
 		}
 
-		public DbSet<TodoItem> TodoItems { get; set; }
+		public DbSet<TodoItem> TodoItem { get; set; }
 	}
 }
