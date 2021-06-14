@@ -21,8 +21,8 @@ namespace ProjetoGPS_API
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			//services.AddDbContext<Context>(opt => opt.UseMySQL(this.Configuration.GetConnectionString("DefaultConnection")));
-			services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("teste"));
+			services.AddDbContext<Context>(opt => opt.UseMySQL(this.Configuration.GetConnectionString("DefaultConnection")));
+			//services.AddDbContext<Context>(opt => opt.UseInMemoryDatabase("teste"));
 			services.AddControllers();
 		}
 
