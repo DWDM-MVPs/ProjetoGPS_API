@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjetoGPS_API.Models;
 
 namespace ProjetoGPS_API.Models
 {

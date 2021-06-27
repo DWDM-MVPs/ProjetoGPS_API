@@ -19,6 +19,11 @@ namespace ProjetoGPS_API.Controllers
 			_context = context;
 		}
 
+		private bool AdminsExists(long id)
+		{
+			return _context.Admins.Any(e => e.ID == id);
+		}
+
 
 
 		// ██╗░░░░░░█████╗░░██████╗░██╗███╗░░██╗
@@ -113,11 +118,6 @@ namespace ProjetoGPS_API.Controllers
 			await _context.SaveChangesAsync();
 
 			return this.NoContent();
-		}
-
-		private bool AdminsExists(long id)
-		{
-			return _context.Admins.Any(e => e.ID == id);
 		}
 	}
 }

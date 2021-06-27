@@ -20,14 +20,39 @@ namespace ProjetoGPS_API.Controllers
 			_context = context;
 		}
 
-		// GET: api/Applications
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<Applications>>> GetApplications()
+		private bool ApplicationsExists(long id)
 		{
-			return await _context.Applications.ToListAsync();
+			return _context.Applications.Any(e => e.ID == id);
 		}
 
-		// GET: api/Applications/5
+
+
+
+
+		// ░██████╗░███████╗████████╗  ██████╗░██╗░░░██╗  ░██████╗████████╗░█████╗░████████╗███████╗
+		// ██╔════╝░██╔════╝╚══██╔══╝  ██╔══██╗╚██╗░██╔╝  ██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝██╔════╝
+		// ██║░░██╗░█████╗░░░░░██║░░░  ██████╦╝░╚████╔╝░  ╚█████╗░░░░██║░░░███████║░░░██║░░░█████╗░░
+		// ██║░░╚██╗██╔══╝░░░░░██║░░░  ██╔══██╗░░╚██╔╝░░  ░╚═══██╗░░░██║░░░██╔══██║░░░██║░░░██╔══╝░░
+		// ╚██████╔╝███████╗░░░██║░░░  ██████╦╝░░░██║░░░  ██████╔╝░░░██║░░░██║░░██║░░░██║░░░███████╗
+		// ░╚═════╝░╚══════╝░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
+		[Route("list/{state}")]
+		[HttpGet]
+		public async Task<ActionResult<IEnumerable<Applications>>> GetApplications(int state)
+		{
+			List<Applications> applications = await _context.Applications.Where(app => app.State == state).ToListAsync();
+			return applications;
+		}
+
+
+
+
+
+		// ░██████╗░███████╗████████╗  ██████╗░██╗░░░██╗  ██╗██████╗░
+		// ██╔════╝░██╔════╝╚══██╔══╝  ██╔══██╗╚██╗░██╔╝  ██║██╔══██╗
+		// ██║░░██╗░█████╗░░░░░██║░░░  ██████╦╝░╚████╔╝░  ██║██║░░██║
+		// ██║░░╚██╗██╔══╝░░░░░██║░░░  ██╔══██╗░░╚██╔╝░░  ██║██║░░██║
+		// ╚██████╔╝███████╗░░░██║░░░  ██████╦╝░░░██║░░░  ██║██████╔╝
+		// ░╚═════╝░╚══════╝░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░  ╚═╝╚═════╝░
 		[HttpGet("{id}")]
 		public async Task<ActionResult<Applications>> GetApplications(long id)
 		{
@@ -41,8 +66,16 @@ namespace ProjetoGPS_API.Controllers
 			return applications;
 		}
 
-		// PUT: api/Applications/5
-		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+
+
+
+		// ██╗░░░██╗██████╗░██████╗░░█████╗░████████╗███████╗
+		// ██║░░░██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+		// ██║░░░██║██████╔╝██║░░██║███████║░░░██║░░░█████╗░░
+		// ██║░░░██║██╔═══╝░██║░░██║██╔══██║░░░██║░░░██╔══╝░░
+		// ╚██████╔╝██║░░░░░██████╔╝██║░░██║░░░██║░░░███████╗
+		// ░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
 		[HttpPut("{id}")]
 		public async Task<IActionResult> PutApplications(long id, Applications applications)
 		{
@@ -72,8 +105,16 @@ namespace ProjetoGPS_API.Controllers
 			return this.NoContent();
 		}
 
-		// POST: api/Applications
-		// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+
+
+
+		// ░█████╗░██████╗░███████╗░█████╗░████████╗███████╗
+		// ██╔══██╗██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
+		// ██║░░╚═╝██████╔╝█████╗░░███████║░░░██║░░░█████╗░░
+		// ██║░░██╗██╔══██╗██╔══╝░░██╔══██║░░░██║░░░██╔══╝░░
+		// ╚█████╔╝██║░░██║███████╗██║░░██║░░░██║░░░███████╗
+		// ░╚════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
 		[HttpPost]
 		public async Task<ActionResult<Applications>> PostApplications(Applications applications)
 		{
@@ -83,7 +124,16 @@ namespace ProjetoGPS_API.Controllers
 			return CreatedAtAction("GetApplications", new { id = applications.ID }, applications);
 		}
 
-		// DELETE: api/Applications/5
+
+
+
+
+		// ██████╗░███████╗██╗░░░░░███████╗████████╗███████╗
+		// ██╔══██╗██╔════╝██║░░░░░██╔════╝╚══██╔══╝██╔════╝
+		// ██║░░██║█████╗░░██║░░░░░█████╗░░░░░██║░░░█████╗░░
+		// ██║░░██║██╔══╝░░██║░░░░░██╔══╝░░░░░██║░░░██╔══╝░░
+		// ██████╔╝███████╗███████╗███████╗░░░██║░░░███████╗
+		// ╚═════╝░╚══════╝╚══════╝╚══════╝░░░╚═╝░░░╚══════╝
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteApplications(long id)
 		{
@@ -97,11 +147,6 @@ namespace ProjetoGPS_API.Controllers
 			await _context.SaveChangesAsync();
 
 			return NoContent();
-		}
-
-		private bool ApplicationsExists(long id)
-		{
-			return _context.Applications.Any(e => e.ID == id);
 		}
 	}
 }

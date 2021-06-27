@@ -20,14 +20,37 @@ namespace ProjetoGPS_API.Controllers
             _context = context;
         }
 
-        // GET: api/Comments
+        private bool CommentsExists(long id)
+        {
+            return _context.Comments.Any(e => e.ID == id);
+        }
+
+
+
+
+
+        // ░██████╗░███████╗████████╗
+        // ██╔════╝░██╔════╝╚══██╔══╝
+        // ██║░░██╗░█████╗░░░░░██║░░░
+        // ██║░░╚██╗██╔══╝░░░░░██║░░░
+        // ╚██████╔╝███████╗░░░██║░░░
+        // ░╚═════╝░╚══════╝░░░╚═╝░░░
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Comments>>> GetComments()
         {
             return await _context.Comments.ToListAsync();
         }
 
-        // GET: api/Comments/5
+
+
+
+
+        // ░██████╗░███████╗████████╗  ██████╗░██╗░░░██╗  ██╗██████╗░
+        // ██╔════╝░██╔════╝╚══██╔══╝  ██╔══██╗╚██╗░██╔╝  ██║██╔══██╗
+        // ██║░░██╗░█████╗░░░░░██║░░░  ██████╦╝░╚████╔╝░  ██║██║░░██║
+        // ██║░░╚██╗██╔══╝░░░░░██║░░░  ██╔══██╗░░╚██╔╝░░  ██║██║░░██║
+        // ╚██████╔╝███████╗░░░██║░░░  ██████╦╝░░░██║░░░  ██║██████╔╝
+        // ░╚═════╝░╚══════╝░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░  ╚═╝╚═════╝░
         [HttpGet("{id}")]
         public async Task<ActionResult<Comments>> GetComments(long id)
         {
@@ -41,8 +64,16 @@ namespace ProjetoGPS_API.Controllers
             return comments;
         }
 
-        // PUT: api/Comments/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+
+
+
+        // ░█████╗░██████╗░███████╗░█████╗░████████╗███████╗
+        // ██╔══██╗██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
+        // ██║░░╚═╝██████╔╝█████╗░░███████║░░░██║░░░█████╗░░
+        // ██║░░██╗██╔══██╗██╔══╝░░██╔══██║░░░██║░░░██╔══╝░░
+        // ╚█████╔╝██║░░██║███████╗██║░░██║░░░██║░░░███████╗
+        // ░╚════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
         [HttpPut("{id}")]
         public async Task<IActionResult> PutComments(long id, Comments comments)
         {
@@ -72,8 +103,16 @@ namespace ProjetoGPS_API.Controllers
             return NoContent();
         }
 
-        // POST: api/Comments
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+
+
+
+        // ██╗░░░██╗██████╗░██████╗░░█████╗░████████╗███████╗
+        // ██║░░░██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+        // ██║░░░██║██████╔╝██║░░██║███████║░░░██║░░░█████╗░░
+        // ██║░░░██║██╔═══╝░██║░░██║██╔══██║░░░██║░░░██╔══╝░░
+        // ╚██████╔╝██║░░░░░██████╔╝██║░░██║░░░██║░░░███████╗
+        // ░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
         [HttpPost]
         public async Task<ActionResult<Comments>> PostComments(Comments comments)
         {
@@ -83,7 +122,16 @@ namespace ProjetoGPS_API.Controllers
             return CreatedAtAction("GetComments", new { id = comments.ID }, comments);
         }
 
-        // DELETE: api/Comments/5
+
+
+
+
+        // ██████╗░███████╗██╗░░░░░███████╗████████╗███████╗
+        // ██╔══██╗██╔════╝██║░░░░░██╔════╝╚══██╔══╝██╔════╝
+        // ██║░░██║█████╗░░██║░░░░░█████╗░░░░░██║░░░█████╗░░
+        // ██║░░██║██╔══╝░░██║░░░░░██╔══╝░░░░░██║░░░██╔══╝░░
+        // ██████╔╝███████╗███████╗███████╗░░░██║░░░███████╗
+        // ╚═════╝░╚══════╝╚══════╝╚══════╝░░░╚═╝░░░╚══════╝
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteComments(long id)
         {
@@ -97,11 +145,6 @@ namespace ProjetoGPS_API.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
-        }
-
-        private bool CommentsExists(long id)
-        {
-            return _context.Comments.Any(e => e.ID == id);
         }
     }
 }
