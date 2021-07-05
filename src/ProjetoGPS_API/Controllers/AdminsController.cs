@@ -32,10 +32,10 @@ namespace ProjetoGPS_API.Controllers
 		// ██║░░░░░██║░░██║██║░░╚██╗██║██║╚████║
 		// ███████╗╚█████╔╝╚██████╔╝██║██║░╚███║
 		// ╚══════╝░╚════╝░░╚═════╝░╚═╝╚═╝░░╚══╝
-		[HttpGet("login/{username}/{encryptedPassword}")]
-		public async Task<ActionResult<bool>> Login(string username, string encryptedPassword)
+		[HttpGet("login/{username}/{password}")]
+		public async Task<ActionResult<bool>> Login(string username, string password)
 		{
-			IQueryable<Admins> admins = _context.Admins.Where(adm => adm.Username == username && adm.Password == encryptedPassword);
+			IQueryable<Admins> admins = _context.Admins.Where(adm => adm.Username == username && adm.Password == password);
 			if (admins.Any())
 			{
 				return this.Ok("Login was successful.");

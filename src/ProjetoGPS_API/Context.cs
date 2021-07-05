@@ -10,7 +10,6 @@ namespace ProjetoGPS_API.Models
 
 		public DbSet<Admins> Admins { get; set; }
 		public DbSet<Applications> Applications { get; set; }
-		public DbSet<Comments> Comments { get; set; }
 		public DbSet<Placeholders> Placeholders { get; set; }
 	}
 }
