@@ -35,12 +35,33 @@ namespace ProjetoGPS_API.Controllers
 		[HttpGet("login/{username}/{password}")]
 		public async Task<ActionResult<bool>> Login(string username, string password)
 		{
-			IQueryable<Admins> admins = _context.Admins.Where(adm => adm.Username == username && adm.Password == password);
-			if (admins.Any())
+			Admins admins = await _context.Admins.Where(adm => adm.Username == username && adm.Password == password).FirstOrDefaultAsync();
+			if (admins != null)
 			{
 				return this.Ok("Login was successful.");
 			}
 			return this.Unauthorized("Invalid username and password combination.");
+		}
+
+
+
+		// ░██████╗░███████╗████████╗
+		// ██╔════╝░██╔════╝╚══██╔══╝
+		// ██║░░██╗░█████╗░░░░░██║░░░
+		// ██║░░╚██╗██╔══╝░░░░░██║░░░
+		// ╚██████╔╝███████╗░░░██║░░░
+		// ░╚═════╝░╚══════╝░░░╚═╝░░░
+		[HttpGet]
+		public async Task<ActionResult<Admins>> GetAdmins()
+		{
+			var admins = await _context.Admins.FirstOrDefaultAsync();
+
+			if (admins == null)
+			{
+				return NotFound();
+			}
+
+			return admins;
 		}
 
 

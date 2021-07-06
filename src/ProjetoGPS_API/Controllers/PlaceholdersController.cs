@@ -20,45 +20,29 @@ namespace ProjetoGPS_API.Controllers
 			_context = context;
 		}
 
-		private bool PlaceholdersExists(long id)
+		private bool PlaceholdersExists(string name)
 		{
-			return _context.Placeholders.Any(e => e.ID == id);
+			return _context.Placeholders.Any(e => e.Placeholder == name);
 		}
 
 
 
 
 
-		// ░██████╗░███████╗████████╗
-		// ██╔════╝░██╔════╝╚══██╔══╝
-		// ██║░░██╗░█████╗░░░░░██║░░░
-		// ██║░░╚██╗██╔══╝░░░░░██║░░░
-		// ╚██████╔╝███████╗░░░██║░░░
-		// ░╚═════╝░╚══════╝░░░╚═╝░░░
-		[HttpGet]
-		public async Task<ActionResult<IEnumerable<Placeholders>>> GetPlaceholders()
+		// ░██████╗░███████╗████████╗  ██████╗░██╗░░░██╗  ██████╗░██╗░░░░░░█████╗░░█████╗░███████╗██╗░░██╗░█████╗░██╗░░░░░██████╗░███████╗██████╗░
+		// ██╔════╝░██╔════╝╚══██╔══╝  ██╔══██╗╚██╗░██╔╝  ██╔══██╗██║░░░░░██╔══██╗██╔══██╗██╔════╝██║░░██║██╔══██╗██║░░░░░██╔══██╗██╔════╝██╔══██╗
+		// ██║░░██╗░█████╗░░░░░██║░░░  ██████╦╝░╚████╔╝░  ██████╔╝██║░░░░░███████║██║░░╚═╝█████╗░░███████║██║░░██║██║░░░░░██║░░██║█████╗░░██████╔╝
+		// ██║░░╚██╗██╔══╝░░░░░██║░░░  ██╔══██╗░░╚██╔╝░░  ██╔═══╝░██║░░░░░██╔══██║██║░░██╗██╔══╝░░██╔══██║██║░░██║██║░░░░░██║░░██║██╔══╝░░██╔══██╗
+		// ╚██████╔╝███████╗░░░██║░░░  ██████╦╝░░░██║░░░  ██║░░░░░███████╗██║░░██║╚█████╔╝███████╗██║░░██║╚█████╔╝███████╗██████╔╝███████╗██║░░██║
+		// ░╚═════╝░╚══════╝░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░  ╚═╝░░░░░╚══════╝╚═╝░░╚═╝░╚════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚══════╝╚═════╝░╚══════╝╚═╝░░╚═╝
+		[HttpGet("{placeholder}")]
+		public async Task<ActionResult<Placeholders>> GetPlaceholders(string placeholder)
 		{
-			return await _context.Placeholders.ToListAsync();
-		}
-
-
-
-
-
-		// ░██████╗░███████╗████████╗  ██████╗░██╗░░░██╗  ██╗██████╗░
-		// ██╔════╝░██╔════╝╚══██╔══╝  ██╔══██╗╚██╗░██╔╝  ██║██╔══██╗
-		// ██║░░██╗░█████╗░░░░░██║░░░  ██████╦╝░╚████╔╝░  ██║██║░░██║
-		// ██║░░╚██╗██╔══╝░░░░░██║░░░  ██╔══██╗░░╚██╔╝░░  ██║██║░░██║
-		// ╚██████╔╝███████╗░░░██║░░░  ██████╦╝░░░██║░░░  ██║██████╔╝
-		// ░╚═════╝░╚══════╝░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░  ╚═╝╚═════╝░
-		[HttpGet("{id}")]
-		public async Task<ActionResult<Placeholders>> GetPlaceholders(long id)
-		{
-			var placeholders = await _context.Placeholders.FindAsync(id);
+			Placeholders placeholders = await _context.Placeholders.Where(p => p.Placeholder == placeholder).FirstOrDefaultAsync();
 
 			if (placeholders == null)
 			{
-				return NotFound();
+				return this.NotFound();
 			}
 
 			return placeholders;
@@ -68,18 +52,18 @@ namespace ProjetoGPS_API.Controllers
 
 
 
-		// ░█████╗░██████╗░███████╗░█████╗░████████╗███████╗
-		// ██╔══██╗██╔══██╗██╔════╝██╔══██╗╚══██╔══╝██╔════╝
-		// ██║░░╚═╝██████╔╝█████╗░░███████║░░░██║░░░█████╗░░
-		// ██║░░██╗██╔══██╗██╔══╝░░██╔══██║░░░██║░░░██╔══╝░░
-		// ╚█████╔╝██║░░██║███████╗██║░░██║░░░██║░░░███████╗
-		// ░╚════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
-		[HttpPut("{id}")]
-		public async Task<IActionResult> PutPlaceholders(long id, Placeholders placeholders)
+		// ██╗░░░██╗██████╗░██████╗░░█████╗░████████╗███████╗  ██████╗░██╗░░░██╗  ██████╗░██╗░░░░░░█████╗░░█████╗░███████╗██╗░░██╗░█████╗░██╗░░░░░██████╗░███████╗██████╗░
+		// ██║░░░██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝  ██╔══██╗╚██╗░██╔╝  ██╔══██╗██║░░░░░██╔══██╗██╔══██╗██╔════╝██║░░██║██╔══██╗██║░░░░░██╔══██╗██╔════╝██╔══██╗
+		// ██║░░░██║██████╔╝██║░░██║███████║░░░██║░░░█████╗░░  ██████╦╝░╚████╔╝░  ██████╔╝██║░░░░░███████║██║░░╚═╝█████╗░░███████║██║░░██║██║░░░░░██║░░██║█████╗░░██████╔╝
+		// ██║░░░██║██╔═══╝░██║░░██║██╔══██║░░░██║░░░██╔══╝░░  ██╔══██╗░░╚██╔╝░░  ██╔═══╝░██║░░░░░██╔══██║██║░░██╗██╔══╝░░██╔══██║██║░░██║██║░░░░░██║░░██║██╔══╝░░██╔══██╗
+		// ╚██████╔╝██║░░░░░██████╔╝██║░░██║░░░██║░░░███████╗  ██████╦╝░░░██║░░░  ██║░░░░░███████╗██║░░██║╚█████╔╝███████╗██║░░██║╚█████╔╝███████╗██████╔╝███████╗██║░░██║
+		// ░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝  ╚═════╝░░░░╚═╝░░░  ╚═╝░░░░░╚══════╝╚═╝░░╚═╝░╚════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚══════╝╚═════╝░╚══════╝╚═╝░░╚═╝
+		[HttpPut("{name}")]
+		public async Task<IActionResult> PutPlaceholders(string name, Placeholders placeholders)
 		{
-			if (id != placeholders.ID)
+			if (name != placeholders.Placeholder)
 			{
-				return BadRequest();
+				return this.BadRequest();
 			}
 
 			_context.Entry(placeholders).State = EntityState.Modified;
@@ -90,9 +74,9 @@ namespace ProjetoGPS_API.Controllers
 			}
 			catch (DbUpdateConcurrencyException)
 			{
-				if (!PlaceholdersExists(id))
+				if (!this.PlaceholdersExists(name))
 				{
-					return NotFound();
+					return this.NotFound();
 				}
 				else
 				{
@@ -100,51 +84,7 @@ namespace ProjetoGPS_API.Controllers
 				}
 			}
 
-			return NoContent();
-		}
-
-
-
-
-
-		// ██╗░░░██╗██████╗░██████╗░░█████╗░████████╗███████╗
-		// ██║░░░██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
-		// ██║░░░██║██████╔╝██║░░██║███████║░░░██║░░░█████╗░░
-		// ██║░░░██║██╔═══╝░██║░░██║██╔══██║░░░██║░░░██╔══╝░░
-		// ╚██████╔╝██║░░░░░██████╔╝██║░░██║░░░██║░░░███████╗
-		// ░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
-		[HttpPost]
-		public async Task<ActionResult<Placeholders>> PostPlaceholders(Placeholders placeholders)
-		{
-			_context.Placeholders.Add(placeholders);
-			await _context.SaveChangesAsync();
-
-			return CreatedAtAction("GetPlaceholders", new { id = placeholders.ID }, placeholders);
-		}
-
-
-
-
-
-		// ██████╗░███████╗██╗░░░░░███████╗████████╗███████╗
-		// ██╔══██╗██╔════╝██║░░░░░██╔════╝╚══██╔══╝██╔════╝
-		// ██║░░██║█████╗░░██║░░░░░█████╗░░░░░██║░░░█████╗░░
-		// ██║░░██║██╔══╝░░██║░░░░░██╔══╝░░░░░██║░░░██╔══╝░░
-		// ██████╔╝███████╗███████╗███████╗░░░██║░░░███████╗
-		// ╚═════╝░╚══════╝╚══════╝╚══════╝░░░╚═╝░░░╚══════╝
-		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeletePlaceholders(long id)
-		{
-			var placeholders = await _context.Placeholders.FindAsync(id);
-			if (placeholders == null)
-			{
-				return NotFound();
-			}
-
-			_context.Placeholders.Remove(placeholders);
-			await _context.SaveChangesAsync();
-
-			return NoContent();
+			return this.NoContent();
 		}
 	}
 }
